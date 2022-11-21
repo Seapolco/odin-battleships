@@ -4,7 +4,10 @@
   "description": "Battleship app for practicing the Jest test suit",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose"
+    "test": "jest --watchAll --verbose",
+    "build" : "webpack",
+    "dev" : "webpack serve"
+
   },
   "keywords": [],
   "author": "",
