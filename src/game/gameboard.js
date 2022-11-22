@@ -1,6 +1,8 @@
 
 import startingGameBoardArray from "./startingGameBoardArray"
 
+import shipId from './shipIdentifier';
+
 
 
 // No.	Class of ship	Size
@@ -17,11 +19,17 @@ const Gameboard = function gameboardFactory() {
 
     this.gameBoardArray = startingGameBoardArray;
 
-    this.placedShipPositions = []
+    this.placedShipPositions = [];
+
+    this.placedShipsObject = {
+
+    }
 
     
 
     this.placeShip = (shipLength, alignment, startingPosition) => {
+    
+     this.shipType = shipId(shipLength)
     
      this.position = [];
       
@@ -48,6 +56,8 @@ const Gameboard = function gameboardFactory() {
       this.position.forEach((e) => {
         this.placedShipPositions.push(e)
       })
+
+      this.placedShipsObject[this.shipType] = this.position
 
 
     }

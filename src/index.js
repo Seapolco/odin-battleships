@@ -48,7 +48,7 @@ playerOneBoard.placeShip(2, 'horizontal', 91);
 
 gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(1, 'horizontal', 46);
+playerOneBoard.placeShip(2, 'horizontal', 46);
 
 gameboardPopulator(playerOneBoard)
 
@@ -71,6 +71,9 @@ playerOneBoard.placeShip(4, 'horizontal', 22);
 
 console.log(playerOneBoard.placedShipPositions)
 console.log(playerOneBoard.gameBoardArray.length)
+
+console.log(playerOneBoard.placedShipsObject);
+
 
 
 

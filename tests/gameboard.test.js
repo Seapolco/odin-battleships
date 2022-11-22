@@ -22,9 +22,5 @@ test('placeShip method works if given valid starting position', () => {
 
 })
 
-test.todo('placeship method throws error if given incorrect starting position', () => {
-    // throws error if position exceeds grid
-    //throws error if ship already placed in the desired area
-    
-})
+test.todo('placeship method throws error if given incorrect starting position')
 
