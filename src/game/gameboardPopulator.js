@@ -10,7 +10,7 @@ const gameboardPopulator = (player) => {
 
     player.gameBoardArray.forEach((e) => {
         e.forEach((e,i) => {
-            console.log({e,i})
+          
             let square = document.createElement('div');
             square.setAttribute('data', Number(e));
             square.style.height = "30px";

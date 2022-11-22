@@ -5,10 +5,6 @@ import home from './pages/home';
 import Gameboard from './game/gameboard';
 import gameboardPopulator from "./game/gameboardPopulator";
 
-//import gameboardPopulator from './game/gameboardPopulator';
-
-
-//let gameboardArray = home().gameboardArray
 
 let playerOneBoard = new Gameboard();
 
@@ -74,7 +70,7 @@ console.log(playerOneBoard.placedShipPositions)
 playerOneBoard.placeShip(4, 'horizontal', 22);
 
 console.log(playerOneBoard.placedShipPositions)
-console.log(playerOneBoard.gameBoardArray)
+console.log(playerOneBoard.gameBoardArray.length)
 
 
 
