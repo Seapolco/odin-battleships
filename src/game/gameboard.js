@@ -1,5 +1,6 @@
 
-import startingGameboardArray from "./startingGameboardArray"
+import startingGameBoardArray from "./startingGameBoardArray"
+
 
 
 // No.	Class of ship	Size
@@ -13,38 +14,43 @@ import startingGameboardArray from "./startingGameboardArray"
 
 const Gameboard = function gameboardFactory() {
 
-    this.gameBoardArray = startingGameboardArray;
+
+    this.gameBoardArray = startingGameBoardArray;
+
+    this.placedShipPositions = []
 
     
 
     this.placeShip = (shipLength, alignment, startingPosition) => {
     
-     let position = [];
+     this.position = [];
       
       if(alignment === 'horizontal') {
         for(let i = 0; i < shipLength; i++) {
-          position.push(startingPosition + i);
+          this.position.push(startingPosition + i);
         }
       }
       
       if(alignment === 'vertical') {
         for(let i = 0; i < shipLength; i++) {
-          position.push(startingPosition + (i*10))
+          this.position.push(startingPosition + (i*10))
         }
       }
-    }
-
-    this.startingGameboardArray.forEach((e,i) => {
+      this.gameBoardArray.forEach((e,i) => {
 
         e.forEach((j,k) => {
-          if(position.includes(j)) {
+          if(this.position.includes(j)) {
             
-            this.startingGameboardArray[i].splice(k, 1, `${this.startingGameboardArray[i][k]}`)
+            this.gameBoardArray[i].splice(k, 1, `${this.gameBoardArray[i][k]}`)
           }
         })
       })
+      this.position.forEach((e) => {
+        this.placedShipPositions.push(e)
+      })
 
 
+    }
 
 
 
