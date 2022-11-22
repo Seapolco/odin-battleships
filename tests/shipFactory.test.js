@@ -1,4 +1,4 @@
-import "../src/game/shipFactory";
+
 import Ship from "../src/game/shipFactory";
 
 test('creates a new ship object with correct values', () => {
@@ -15,21 +15,21 @@ test('isHit method increments the hit property by one', () => {
     newShip.isHit();
 
     expect(newShip.hits).toEqual(1);
+
+    newShip.isHit();
+    newShip.isHit();
+
+    expect(newShip.hits).toEqual(3);
 })
-
-const testShip = new Ship(2);
-testShip.isHit();
-testShip.isHit();
-
-
 
 test('isSunk returns true if hits === length of ship', () => {
 
+    const newShip = new Ship(2);
 
+    newShip.isHit();
+    newShip.isHit();
 
-        
-
- 
+    expect(newShip.isSunk()).toBeTruthy();
 
 })
 

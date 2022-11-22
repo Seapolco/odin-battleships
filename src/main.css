@@ -1,3 +1,10 @@
 * {
     color: pink;
 }
+
+.gameboard {
+    display: grid;
+    grid-template-rows: repeat(10, 30px);
+    grid-template-columns: repeat(10, 30px)
+
+}
