@@ -69,12 +69,27 @@ console.log(playerOneBoard.placedShipPositions)
 
 playerOneBoard.placeShip(4, 'horizontal', 22);
 
+gameboardPopulator(playerOneBoard)
+
 console.log(playerOneBoard.placedShipPositions)
 console.log(playerOneBoard.gameBoardArray.length)
 
 console.log(playerOneBoard.placedShipsObject);
 
+playerOneBoard.receiveAttack(23)
+playerOneBoard.receiveAttack(2);
 
+console.log(playerOneBoard.placedShipsObject);
+
+console.log(playerOneBoard.gameBoardArray)
+console.log(playerOneBoard.missedShots)
+
+gameboardPopulator(playerOneBoard)
+
+playerOneBoard.receiveAttack(95)
+playerOneBoard.receiveAttack(1);
+
+gameboardPopulator(playerOneBoard)
 
 
 

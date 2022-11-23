@@ -1,5 +1,5 @@
 
-const gameboardPopulator = (player) => {
+const gameboardPopulator = (gameboard) => {
 
     const gameboardContainer = document.querySelector('.gameboard');
 
@@ -8,7 +8,9 @@ const gameboardPopulator = (player) => {
         gameboardContainer.removeChild(gameboardContainer.lastChild)
     }
 
-    player.gameBoardArray.forEach((e) => {
+    //Ship placement
+
+    gameboard.gameBoardArray.forEach((e) => {
         e.forEach((e,i) => {
           
             let square = document.createElement('div');
@@ -16,7 +18,14 @@ const gameboardPopulator = (player) => {
             square.style.height = "30px";
             square.style.width = "30px";
             if(typeof e === 'string') {
-                square.style.backgroundColor = 'red';
+                if(e === 'X') {
+                    square.style.backgroundColor = 'red'
+                } else if(e === 'O') {
+                    square.style.backgroundColor = 'black'
+                } else {
+                    square.style.backgroundColor = 'green';
+                }
+               
             } else {
                 square.style.backgroundColor = 'blue';
             }
@@ -25,6 +34,12 @@ const gameboardPopulator = (player) => {
             gameboardContainer.appendChild(square)
         })
     })
+
+    //Hit placement 
+
+
+
+
 
 }
 

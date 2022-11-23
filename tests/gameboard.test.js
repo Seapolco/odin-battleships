@@ -24,3 +24,8 @@ test('placeShip method works if given valid starting position', () => {
 
 test.todo('placeship method throws error if given incorrect starting position')
 
+test('receiveAttack method returns true or false depending on whether a ship was hit', () => {
+
+    let newGameboard = new GameBoard
+})
+
