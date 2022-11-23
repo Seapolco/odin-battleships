@@ -2,6 +2,338 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/game/gameboard.js":
+/*!*******************************!*\
+  !*** ./src/game/gameboard.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _startingGameBoardArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./startingGameBoardArray */ "./src/game/startingGameBoardArray.js");
+/* harmony import */ var _shipIdentifier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./shipIdentifier */ "./src/game/shipIdentifier.js");
+
+
+
+// No.	Class of ship	Size
+// 1	Carrier	         5
+// 2	Battleship     	 4
+// 3	Cruiser	         3
+// 4	Submarine	     3
+// 5	Destroyer	     2
+
+var Gameboard = function gameboardFactory() {
+  var _this = this;
+  this.gameBoardArray = _startingGameBoardArray__WEBPACK_IMPORTED_MODULE_0__["default"];
+  this.placedShipPositions = [];
+  this.missedShots = [];
+  this.placedShipsObject = {
+    "Carrier": [],
+    "Battleship": [],
+    "Cruiser": [],
+    "Destroyer": [],
+    "Patrol Boat": []
+  };
+  this.placeShip = function (shipLength, alignment, startingPosition) {
+    _this.invalid = "Invalid placement";
+    _this.shipType = (0,_shipIdentifier__WEBPACK_IMPORTED_MODULE_1__["default"])(shipLength);
+    _this.position = [];
+    if (_this.placedShipPositions.includes(startingPosition)) {
+      return _this.invalid;
+      console.log(_this.invalid);
+    }
+    if (alignment === 'horizontal') {
+      for (var i = 0; i < shipLength; i++) {
+        if (_this.placedShipPositions.includes(startingPosition + i)) {
+          console.log("".concat(_this.invalid, " ").concat(startingPosition));
+          return "".concat(_this.invalid, " ").concat(startingPosition);
+        }
+        _this.position.push(startingPosition + i);
+      }
+    }
+    if (alignment === 'vertical') {
+      for (var _i = 0; _i < shipLength; _i++) {
+        if (_this.placedShipPositions.includes(startingPosition + _i * 10)) {
+          console.log("".concat(_this.invalid, " ").concat(startingPosition));
+          return "".concat(_this.invalid, " ").concat(startingPosition);
+        }
+        _this.position.push(startingPosition + _i * 10);
+      }
+    }
+    _this.gameBoardArray.forEach(function (e, i) {
+      e.forEach(function (j, k) {
+        if (_this.position.includes(j)) {
+          _this.gameBoardArray[i].splice(k, 1, "".concat(_this.gameBoardArray[i][k]));
+        }
+      });
+    });
+    _this.position.forEach(function (e) {
+      _this.placedShipPositions.push(e);
+    });
+    console.log(_this.placedShipsObject[_this.shipType]);
+    _this.placedShipsObject[_this.shipType].push(_this.position);
+  };
+  this.receiveAttack = function (placement) {
+    var attempt = "Miss";
+    console.log(attempt);
+    var done = false;
+    var _loop = function _loop(key) {
+      //console.log(obj[key])
+      _this.placedShipsObject[key].forEach(function (e, i) {
+        e.forEach(function (j, k) {
+          if (j === placement) {
+            console.log(key, e, j, k);
+            e.splice(k, 1, "X");
+            attempt = "Hit!";
+            done = true;
+          }
+        });
+      });
+    };
+    for (var key in _this.placedShipsObject) {
+      _loop(key);
+    }
+    console.log('Before GBArry forEAch', attempt);
+    _this.gameBoardArray.forEach(function (e, i) {
+      e.forEach(function (j, k) {
+        if (j == placement) {
+          if (attempt === "Hit!") {
+            _this.gameBoardArray[i].splice(k, 1, "X");
+          } else if (attempt === "Miss") {
+            console.log('imhere');
+            _this.gameBoardArray[i].splice(k, 1, "O");
+          }
+        }
+      });
+    });
+    console.log(attempt, placement, done);
+    if (attempt === "Miss") {
+      _this.missedShots.push(placement);
+    }
+    return attempt;
+  };
+
+  // const obj = {
+  //   "Battleships" : [[1,2,3,4], 
+  //                    [5,6,7,8],
+  //                   [9,10,11,12]],
+  //   "Carrier" : [[13,14,15,16,17]],
+  //   "Cruiser" : [[18,19,20],
+  //               [21,22,23]],
+  //   "Destroyer" : [[24,25],
+  //                   [26,27],
+  //                   [28,29]],
+  //   "Patrol Boat" : [[51], [76]]
+  // }
+
+  // for(key in obj) {
+  //   //console.log(obj[key])
+  //   obj[key].forEach((e,i) => {
+  //     e.forEach((j,k) => {
+  //       if(j === 13) {
+  //         console.log(key,e,j,k)
+  //         e.splice(k,1,`${j}`)
+  //       }
+  //     })
+  //   })
+  // }
+
+  // this.receiveAttack(position) {
+
+  // }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Gameboard);
+
+/***/ }),
+
+/***/ "./src/game/gameboardPopulator.js":
+/*!****************************************!*\
+  !*** ./src/game/gameboardPopulator.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _helpers_elementFactory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/elementFactory */ "./src/helpers/elementFactory.js");
+
+var gameboardPopulator = function gameboardPopulator(gameboard, element) {
+  //const gameboardContainer = document.querySelector('.gameboard');
+
+  while (element.lastChild) {
+    element.removeChild(gameboardContainer.lastChild);
+  }
+
+  //Ship placement
+
+  gameboard.gameBoardArray.forEach(function (e) {
+    e.forEach(function (e, i) {
+      // let square = document.createElement('div');
+      // square.setAttribute('data', Number(e));
+
+      var square = (0,_helpers_elementFactory__WEBPACK_IMPORTED_MODULE_0__["default"])('div', {
+        id: "el-".concat(e)
+      });
+      square.style.height = "30px";
+      square.style.width = "30px";
+      if (typeof e === 'string') {
+        if (e === 'X') {
+          square.style.backgroundColor = 'red';
+        } else if (e === 'O') {
+          square.style.backgroundColor = 'black';
+        } else {
+          square.style.backgroundColor = 'green';
+        }
+      } else {
+        square.style.backgroundColor = 'blue';
+      }
+      square.style.border = 'solid white 3px';
+      element.appendChild(square);
+    });
+  });
+
+  //Hit placement 
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gameboardPopulator);
+
+/***/ }),
+
+/***/ "./src/game/shipIdentifier.js":
+/*!************************************!*\
+  !*** ./src/game/shipIdentifier.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var shipId = function shipIdentifier(shipLength) {
+  var shipType = {
+    5: "Carrier",
+    4: "Battleship",
+    3: "Cruiser",
+    2: "Destroyer",
+    1: "Patrol Boat"
+  };
+  return shipType[shipLength];
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (shipId);
+
+/***/ }),
+
+/***/ "./src/game/startingGameBoardArray.js":
+/*!********************************************!*\
+  !*** ./src/game/startingGameBoardArray.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var startingGameboardArray = [];
+var gameboardSubArray = [];
+for (var i = 1; i <= 100; i++) {
+  gameboardSubArray.push(i);
+  if (i % 10 === 0) {
+    startingGameboardArray.push(gameboardSubArray);
+    gameboardSubArray = [];
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (startingGameboardArray);
+
+/***/ }),
+
+/***/ "./src/helpers/DOMElements.js":
+/*!************************************!*\
+  !*** ./src/helpers/DOMElements.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var dom = function DOMQuerySelectors() {
+  var placementBoard = function placementBoard() {
+    return document.querySelector('.placementBoard');
+  };
+  return {
+    placementBoard: placementBoard
+  };
+}();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (dom);
+
+/***/ }),
+
+/***/ "./src/helpers/elementFactory.js":
+/*!***************************************!*\
+  !*** ./src/helpers/elementFactory.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var elementFactory = function elementFactory(type, attributes) {
+  var element = document.createElement(type);
+  if (attributes) {
+    for (var key in attributes) {
+      element.setAttribute(key, attributes[key]);
+    }
+  }
+  return element;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (elementFactory);
+
+/***/ }),
+
+/***/ "./src/pages/placementPage.js":
+/*!************************************!*\
+  !*** ./src/pages/placementPage.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _helpers_elementFactory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/elementFactory */ "./src/helpers/elementFactory.js");
+
+var placementPage = function placementPageGenerator() {
+  var placementBoard = (0,_helpers_elementFactory__WEBPACK_IMPORTED_MODULE_0__["default"])('div', {
+    "class": 'placementBoard'
+  });
+  document.body.appendChild(placementBoard);
+
+  //   let gameboardArray = [];
+
+  //   let gameboardSubArray = [];
+
+  //   for(let i = 1; i <= 100; i++) {
+  //   gameboardSubArray.push(i);
+  //   if(i % 10 === 0) {
+  //       gameboardArray.push(gameboardSubArray);
+  //       gameboardSubArray = [];
+  //   }
+  // }
+
+  // return {
+  //   gameboardArray
+  // }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (placementPage);
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/main.css":
 /*!************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/main.css ***!
@@ -21,7 +353,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\n    color: pink;\n}", "",{"version":3,"sources":["webpack://./src/main.css"],"names":[],"mappings":"AAAA;IACI,WAAW;AACf","sourcesContent":["* {\n    color: pink;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\n    color: pink;\n}\n\n.placementBoard {\n    display: grid;\n    grid-template-rows: repeat(10, 30px);\n    grid-template-columns: repeat(10, 30px)\n\n}", "",{"version":3,"sources":["webpack://./src/main.css"],"names":[],"mappings":"AAAA;IACI,WAAW;AACf;;AAEA;IACI,aAAa;IACb,oCAAoC;IACpC;;AAEJ","sourcesContent":["* {\n    color: pink;\n}\n\n.placementBoard {\n    display: grid;\n    grid-template-rows: repeat(10, 30px);\n    grid-template-columns: repeat(10, 30px)\n\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -591,10 +923,115 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.css */ "./src/main.css");
+/* harmony import */ var _helpers_DOMElements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/DOMElements */ "./src/helpers/DOMElements.js");
+/* harmony import */ var _pages_placementPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/placementPage */ "./src/pages/placementPage.js");
+/* harmony import */ var _game_gameboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./game/gameboard */ "./src/game/gameboard.js");
+/* harmony import */ var _game_gameboardPopulator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./game/gameboardPopulator */ "./src/game/gameboardPopulator.js");
+
+
+
+
+
+var playerOneBoard = new _game_gameboard__WEBPACK_IMPORTED_MODULE_3__["default"]();
+(0,_pages_placementPage__WEBPACK_IMPORTED_MODULE_2__["default"])();
+var placementBoard = _helpers_DOMElements__WEBPACK_IMPORTED_MODULE_1__["default"].placementBoard();
+console.log(placementBoard);
+var shipLength = 4;
+var alignment = 'vertical';
+var two = document.querySelector('#el-2');
+console.log(two);
+
+//two.style.backgroundColor = 'black'
+
+placementBoard.addEventListener('mouseover', function (e) {
+  console.log(e.target);
+});
+
+// let placementBoard = document.querySelector('.placementBoard')
+
+// console.log(placementBoard)
+(0,_game_gameboardPopulator__WEBPACK_IMPORTED_MODULE_4__["default"])(playerOneBoard, placementBoard);
+
+//console.log(gameboardArray)
+
+// No.	Class of ship	Size
+// 1	Carrier	         5
+// 2	Battleship     	 4
+// 3	Cruiser	         3
+// 4	Submarine	     3
+// 5	Destroyer	     2
+
+// playerOneBoard.placeShip(4, 'horizontal', 23);
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.placeShip(5, 'vertical', 44);
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.placeShip(4, 'vertical', 1);
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.placeShip(3, 'vertical', 79);
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.placeShip(3, 'vertical', 10);
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.placeShip(2, 'horizontal', 58);
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.placeShip(2, 'horizontal', 91);
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.placeShip(2, 'horizontal', 46);
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.placeShip(1, 'horizontal', 51);
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.placeShip(1, 'horizontal', 76);
+
+// gameboardPopulator(playerOneBoard)
+
+// // console.log(gameboard)
+
+// console.log(playerOneBoard.placedShipPositions)
+
+// playerOneBoard.placeShip(4, 'horizontal', 22);
+
+// gameboardPopulator(playerOneBoard)
+
+// console.log(playerOneBoard.placedShipPositions)
+// console.log(playerOneBoard.gameBoardArray.length)
+
+// console.log(playerOneBoard.placedShipsObject);
+
+// playerOneBoard.receiveAttack(23)
+// playerOneBoard.receiveAttack(2);
+
+// console.log(playerOneBoard.placedShipsObject);
+
+// console.log(playerOneBoard.gameBoardArray)
+// console.log(playerOneBoard.missedShots)
+
+// gameboardPopulator(playerOneBoard)
+
+// playerOneBoard.receiveAttack(95)
+// playerOneBoard.receiveAttack(1);
+
+// gameboardPopulator(playerOneBoard)
 
 console.log('POW!');
 })();
 
 /******/ })()
 ;
-//# sourceMappingURL=todoBundle40506a00d4f4c7dffadc.js.map
+//# sourceMappingURL=todoBundle07bc358538eccc7cd6b7.js.map

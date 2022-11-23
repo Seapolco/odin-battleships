@@ -1,6 +1,7 @@
 
 import startingGameBoardArray from "./startingGameBoardArray"
 
+
 import shipId from './shipIdentifier';
 
 
@@ -12,17 +13,20 @@ import shipId from './shipIdentifier';
 // 4	Submarine	     3
 // 5	Destroyer	     2
 
+//let sg = startingGameBoardArray
+
+
 
 
 const Gameboard = function gameboardFactory() {
 
 
-    this.gameBoardArray = startingGameBoardArray;
-
-
+    this.gameBoardArray = startingGameBoardArray
 
     this.placedShipPositions = [];
     this.missedShots = [];
+
+
 
     this.placedShipsObject = {
         "Carrier" : [],
@@ -30,6 +34,26 @@ const Gameboard = function gameboardFactory() {
         "Cruiser" : [],
         "Destroyer" : [],
         "Patrol Boat" : []
+    }
+
+    this.resetGameBoardArray = () => {
+      // console.log(this.placedShipPositions.length)
+      this.gameBoardArray.forEach((e,i) => {
+        e.forEach((j,k) => {
+          if(typeof j === 'string') {
+            // console.log('STRING!')
+            this.gameBoardArray[i].splice(k, 1, Number(j))
+            //e.splice(k, 1, Number(j))
+          }
+        })
+      })
+
+      while(this.placedShipPositions.length >=1) {
+        this.placedShipPositions.pop();
+      }
+
+      // console.log(this.placedShipPositions)
+      // console.log(this.gameBoardArray)
     }
 
     
@@ -43,8 +67,9 @@ const Gameboard = function gameboardFactory() {
      this.position = [];
 
      if(this.placedShipPositions.includes(startingPosition)) {
-      return this.invalid
       console.log(this.invalid)
+      return this.invalid
+      
      }
       
       if(alignment === 'horizontal') {
@@ -80,7 +105,7 @@ const Gameboard = function gameboardFactory() {
         this.placedShipPositions.push(e)
       })
 
-      console.log(this.placedShipsObject[this.shipType])
+     // console.log(this.placedShipsObject[this.shipType])
 
 
 

@@ -1,6 +1,8 @@
 import "./main.css"
 
-import home from './pages/home';
+import dom from './helpers/DOMElements';
+
+import placementPage from './pages/placementPage';
 
 import Gameboard from './game/gameboard';
 import gameboardPopulator from "./game/gameboardPopulator";
@@ -8,7 +10,50 @@ import gameboardPopulator from "./game/gameboardPopulator";
 
 let playerOneBoard = new Gameboard();
 
-gameboardPopulator(playerOneBoard)
+placementPage();
+
+let placementBoard = dom.placementBoard();
+
+console.log(placementBoard)
+
+let shipLength = 4;
+let alignment = 'vertical'
+
+let two = document.getElementById('#el-2');
+console.log(two)
+
+//two.style.backgroundColor = 'black'
+
+placementBoard.addEventListener('mouseover',(e) => {
+    playerOneBoard.resetGameBoardArray();
+
+    gameboardPopulator(playerOneBoard, placementBoard)
+
+    playerOneBoard.placeShip(4, 'horizontal',Number(e.target.id))
+
+    gameboardPopulator(playerOneBoard, placementBoard)
+
+    
+
+
+})
+
+ playerOneBoard.placeShip(5, 'vertical', 44);
+
+ gameboardPopulator(playerOneBoard, placementBoard)
+
+console.log(playerOneBoard.placedShipPositions)
+    
+console.log(playerOneBoard.gameBoardArray)
+
+
+
+
+
+// let placementBoard = document.querySelector('.placementBoard')
+
+// console.log(placementBoard)
+
 
 //console.log(gameboardArray)
 
@@ -20,76 +65,74 @@ gameboardPopulator(playerOneBoard)
 // 5	Destroyer	     2
 
 
-playerOneBoard.placeShip(4, 'horizontal', 23);
+// playerOneBoard.placeShip(4, 'horizontal', 23);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(5, 'vertical', 44);
 
-gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(4, 'vertical', 1);
+// playerOneBoard.placeShip(4, 'vertical', 1);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(3, 'vertical', 79);
+// playerOneBoard.placeShip(3, 'vertical', 79);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(3, 'vertical', 10);
+// playerOneBoard.placeShip(3, 'vertical', 10);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(2, 'horizontal', 58);
+// playerOneBoard.placeShip(2, 'horizontal', 58);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(2, 'horizontal', 91);
+// playerOneBoard.placeShip(2, 'horizontal', 91);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(2, 'horizontal', 46);
+// playerOneBoard.placeShip(2, 'horizontal', 46);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(1, 'horizontal', 51);
+// playerOneBoard.placeShip(1, 'horizontal', 51);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-playerOneBoard.placeShip(1, 'horizontal', 76);
+// playerOneBoard.placeShip(1, 'horizontal', 76);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
 
 
 
-// console.log(gameboard)
+// // console.log(gameboard)
 
-console.log(playerOneBoard.placedShipPositions)
+// console.log(playerOneBoard.placedShipPositions)
 
-playerOneBoard.placeShip(4, 'horizontal', 22);
+// playerOneBoard.placeShip(4, 'horizontal', 22);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-console.log(playerOneBoard.placedShipPositions)
-console.log(playerOneBoard.gameBoardArray.length)
+// console.log(playerOneBoard.placedShipPositions)
+// console.log(playerOneBoard.gameBoardArray.length)
 
-console.log(playerOneBoard.placedShipsObject);
+// console.log(playerOneBoard.placedShipsObject);
 
-playerOneBoard.receiveAttack(23)
-playerOneBoard.receiveAttack(2);
+// playerOneBoard.receiveAttack(23)
+// playerOneBoard.receiveAttack(2);
 
-console.log(playerOneBoard.placedShipsObject);
+// console.log(playerOneBoard.placedShipsObject);
 
-console.log(playerOneBoard.gameBoardArray)
-console.log(playerOneBoard.missedShots)
+// console.log(playerOneBoard.gameBoardArray)
+// console.log(playerOneBoard.missedShots)
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
-playerOneBoard.receiveAttack(95)
-playerOneBoard.receiveAttack(1);
+// playerOneBoard.receiveAttack(95)
+// playerOneBoard.receiveAttack(1);
 
-gameboardPopulator(playerOneBoard)
+// gameboardPopulator(playerOneBoard)
 
 
 

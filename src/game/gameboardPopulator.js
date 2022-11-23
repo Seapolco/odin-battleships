@@ -1,11 +1,12 @@
+import elementFactory from "../helpers/elementFactory"
 
-const gameboardPopulator = (gameboard) => {
+const gameboardPopulator = (gameboard, element) => {
 
-    const gameboardContainer = document.querySelector('.gameboard');
+    //const gameboardContainer = document.querySelector('.gameboard');
 
 
-    while(gameboardContainer.lastChild) {
-        gameboardContainer.removeChild(gameboardContainer.lastChild)
+    while(element.lastChild) {
+        element.removeChild(element.lastChild)
     }
 
     //Ship placement
@@ -13,8 +14,10 @@ const gameboardPopulator = (gameboard) => {
     gameboard.gameBoardArray.forEach((e) => {
         e.forEach((e,i) => {
           
-            let square = document.createElement('div');
-            square.setAttribute('data', Number(e));
+            // let square = document.createElement('div');
+            // square.setAttribute('data', Number(e));
+
+            let square = elementFactory('div', {id : e})
             square.style.height = "30px";
             square.style.width = "30px";
             if(typeof e === 'string') {
@@ -31,7 +34,7 @@ const gameboardPopulator = (gameboard) => {
             }
             square.style.border = 'solid white 3px'
     
-            gameboardContainer.appendChild(square)
+            element.appendChild(square)
         })
     })
 
