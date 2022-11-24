@@ -20,13 +20,31 @@ let placementBoard = dom.placementBoard();
 
 let unplacedShips = [5,4,4,3,3,2];
 
+let alignmentBtn = document.querySelector('.alignment');
+
+console.log(alignmentBtn)
+
+let alignment = 'horizontal';
+
+
+alignmentBtn.addEventListener('click', () => {
+        if(alignmentBtn.innerText === 'Switch to vertical placement') {
+                alignmentBtn.innerText = 'Switch to horizontal placement';
+                alignment = 'vertical'
+        } else if(alignmentBtn.innerText === 'Switch to horizontal placement') {
+                alignmentBtn.innerText = 'Switch to vertical placement';
+                alignment = 'horizontal'
+        }
+        
+})
+
 
 placementBoard.addEventListener('click', (e) => {
         
         console.log(e.target.id)
-        let valid = playerOneBoard.placeShip(unplacedShips[0], 'vertical', Number(e.target.id));
+        let valid = playerOneBoard.placeShip(unplacedShips[0], alignment, Number(e.target.id));
         if(valid !== 'Invalid placement') {
-                playerOneBoard.placeShip(unplacedShips[0], 'vertical', Number(e.target.id))
+                playerOneBoard.placeShip(unplacedShips[0], alignment, Number(e.target.id))
                 gameboardPopulator(playerOneBoard, placementBoard)
                 unplacedShips.shift();
                 console.log(unplacedShips.length)
