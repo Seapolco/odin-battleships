@@ -68,6 +68,8 @@ const Gameboard = function gameboardFactory() {
     
      this.position = [];
 
+     console.log(this.placedShipPositions)
+
      if(this.placedShipPositions.includes(startingPosition)) {
       console.log(this.invalid)
       return this.invalid
@@ -162,7 +164,7 @@ const Gameboard = function gameboardFactory() {
       })
 
       // Updates the placeShip obj, currently seems redundant
-      this.placedShipsObject[this.shipType].push(this.position)
+      //this.placedShipsObject[this.shipType].push(this.position)
 
 
     }

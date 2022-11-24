@@ -8,48 +8,72 @@ import elementFactory from "./helpers/elementFactory";
 import Gameboard from './game/gameboard';
 import gameboardPopulator from "./game/gameboardPopulator";
 
+import DOMInteraction from './game/DOMinteraction';
+
 
 let playerOneBoard = new Gameboard();
 
 placementPage();
 
-
-let battleship = document.querySelector('.battleship');
-
-console.log(battleship)
-
-
 let placementBoard = dom.placementBoard();
 
-console.log(placementBoard)
 
-let shipLength = 4;
-let alignment = 'vertical'
-
-let two = document.getElementById('#el-2');
-console.log(two)
-
-//two.style.backgroundColor = 'black'
-
-placementBoard.addEventListener('mouseover',(e) => {
-    playerOneBoard.resetGameBoardArray();
-    gameboardPopulator(playerOneBoard, placementBoard)
-    playerOneBoard.placeShip(4, 'vertical',Number(e.target.id))
-    gameboardPopulator(playerOneBoard, placementBoard)
+let unplacedShips = [5,4,4,3,3,2];
 
 
-    
-
+placementBoard.addEventListener('click', (e) => {
+        
+        console.log(e.target.id)
+        let valid = playerOneBoard.placeShip(unplacedShips[0], 'vertical', Number(e.target.id));
+        if(valid !== 'Invalid placement') {
+                playerOneBoard.placeShip(unplacedShips[0], 'vertical', Number(e.target.id))
+                gameboardPopulator(playerOneBoard, placementBoard)
+                unplacedShips.shift();
+                console.log(unplacedShips.length)
+        }
 
 })
 
- playerOneBoard.placeShip(5, 'vertical', 44);
 
- gameboardPopulator(playerOneBoard, placementBoard)
-
-console.log(playerOneBoard.placedShipPositions)
     
-console.log(playerOneBoard.gameBoardArray)
+
+        // placementBoard.addEventListener('click', (e) => {
+
+        //     console.log(unplacedShips.length)
+
+        //    let goggle = playerOneBoard.placeShip(unplacedShips[0], 'vertical' ,Number(e.target.id))
+        //    console.log(goggle)
+        //    if(goggle == 'Invalid Placement') {
+        //     return 'Invalid Placement'
+        //    } else {
+        //     playerOneBoard.placeShip(unplacedShips[0], 'vertical' ,Number(e.target.id))
+        //     gameboardPopulator(playerOneBoard, placementBoard)
+        //     unplacedShips.shift();
+        //    }
+        // })
+
+
+
+
+// while(unplacedShips.length >= 1) {
+//     placeShips('vertical');
+// }
+
+
+
+// placementBoard.addEventListener('click',(e) => {
+
+//     DOMInteraction.displayShipPlacement(shipLength, alignment,e.target.id, playerOneBoard)
+
+// })
+
+//  playerOneBoard.placeShip(5, 'vertical', 44);
+
+gameboardPopulator(playerOneBoard, placementBoard)
+
+// console.log(playerOneBoard.placedShipPositions)
+    
+// console.log(playerOneBoard.gameBoardArray)
 
 
 
