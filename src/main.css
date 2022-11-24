@@ -1,5 +1,10 @@
 * {
     color: pink;
+    box-sizing: border-box;
+}
+
+body  {
+    background-color: peru;
 }
 
 .placementBoard {
@@ -7,5 +12,13 @@
     grid-template-rows: repeat(10, 30px);
     grid-template-columns: repeat(10, 30px);
     max-width: 0px;
+
+}
+.shipPart {
+    height: 30px;
+    width: 30px;
+    background-color: green;
+    border: solid 2px white;
+
 
 }

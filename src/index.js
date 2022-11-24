@@ -3,6 +3,7 @@ import "./main.css"
 import dom from './helpers/DOMElements';
 
 import placementPage from './pages/placementPage';
+import elementFactory from "./helpers/elementFactory";
 
 import Gameboard from './game/gameboard';
 import gameboardPopulator from "./game/gameboardPopulator";
@@ -11,6 +12,12 @@ import gameboardPopulator from "./game/gameboardPopulator";
 let playerOneBoard = new Gameboard();
 
 placementPage();
+
+
+let battleship = document.querySelector('.battleship');
+
+console.log(battleship)
+
 
 let placementBoard = dom.placementBoard();
 
@@ -26,12 +33,10 @@ console.log(two)
 
 placementBoard.addEventListener('mouseover',(e) => {
     playerOneBoard.resetGameBoardArray();
-
+    gameboardPopulator(playerOneBoard, placementBoard)
+    playerOneBoard.placeShip(4, 'vertical',Number(e.target.id))
     gameboardPopulator(playerOneBoard, placementBoard)
 
-    playerOneBoard.placeShip(4, 'horizontal',Number(e.target.id))
-
-    gameboardPopulator(playerOneBoard, placementBoard)
 
     
 

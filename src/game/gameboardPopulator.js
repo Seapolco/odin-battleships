@@ -17,7 +17,7 @@ const gameboardPopulator = (gameboard, element) => {
             // let square = document.createElement('div');
             // square.setAttribute('data', Number(e));
 
-            let square = elementFactory('div', {id : e})
+            let square = elementFactory('div', {id : e, ondrop :"drop(event)", ondragover :"allowDrop(event)"})
             square.style.height = "30px";
             square.style.width = "30px";
             if(typeof e === 'string') {
@@ -32,7 +32,7 @@ const gameboardPopulator = (gameboard, element) => {
             } else {
                 square.style.backgroundColor = 'blue';
             }
-            square.style.border = 'solid white 3px'
+            square.style.border = 'solid white 2px'
     
             element.appendChild(square)
         })

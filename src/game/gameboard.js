@@ -60,6 +60,8 @@ const Gameboard = function gameboardFactory() {
 
     this.placeShip = (shipLength, alignment, startingPosition) => {
 
+      //console.log(startingPosition + shipLength -1)
+
      this.invalid = "Invalid placement"
     
      this.shipType = shipId(shipLength)
@@ -71,6 +73,51 @@ const Gameboard = function gameboardFactory() {
       return this.invalid
       
      }
+
+     this.ok = true;
+
+     // Check to see if horizontal placement fits within the row
+
+     if(alignment === 'horizontal') {
+
+      this.gameBoardArray.forEach((e,i) => {
+      
+        if(e.includes(startingPosition)) {
+         if((e.indexOf(startingPosition) + shipLength > 10)) {
+     
+           this.ok = false
+         }
+        } else {
+         return true
+        }
+        
+        })
+
+     }
+
+     // Check to see if vertical placement fits within the gameboard
+
+     if(alignment === 'vertical') {
+
+      //console.log(startingPosition)
+      if(startingPosition + (shipLength *10) > 110) {
+        this.ok = false;
+        //console.log(this.invalid)
+      }
+     }
+
+
+
+    // check to see if current placement passes x/y tests
+
+     if(this.ok === false) {
+      //console.log('not ok')
+      //console.log(this.invalid)
+      return this.invalid
+     }
+
+
+    // Checks to see if ship already placed within the desired area & updates current position array
       
       if(alignment === 'horizontal') {
         for(let i = 0; i < shipLength; i++) {
@@ -92,23 +139,29 @@ const Gameboard = function gameboardFactory() {
           this.position.push(startingPosition + (i*10))
         }
       }
+
+    // Updates gameBoardArray with the placement of the ship.
+
       this.gameBoardArray.forEach((e,i) => {
 
         e.forEach((j,k) => {
+        
           if(this.position.includes(j)) {
-            
+            //console.log(e[e.length-1])
+
+
             this.gameBoardArray[i].splice(k, 1, `${this.gameBoardArray[i][k]}`)
           }
         })
       })
+
+      // Updates the array with all the placedShipPositions
+
       this.position.forEach((e) => {
         this.placedShipPositions.push(e)
       })
 
-     // console.log(this.placedShipsObject[this.shipType])
-
-
-
+      // Updates the placeShip obj, currently seems redundant
       this.placedShipsObject[this.shipType].push(this.position)
 
 
