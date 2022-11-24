@@ -94,9 +94,21 @@ placementBoard.addEventListener('click', (e) => {
                 }
 
                 computerContainer.addEventListener('click', (e) => {
+                  let random = () => Math.floor(Math.random() * 100)  +1
                   console.log('BATTLEBABY', e.target.id)
                   computerBoard.receiveAttack(Number(e.target.id))
+                  console.log('random', random())
+                  // optimise random first - ensure random shot
+                  //hasn't already been taken.
+
+                  //then need to ensure that if hit is made, the next shot
+                  //is either one square x/y across,
+                  //need to keep track of possible ships already destroyed.
+                  // shiplengths, adjacents hits.
+                  playerOneBoard.receiveAttack(random())
+                  console.log('playerboardArray',playerOneBoard.gameBoardArray)
                   computerboardPopulator(computerBoard, computerContainer)
+                  gameboardPopulator(playerOneBoard, playerContainer)
                   console.log('successfulShotsonComp',computerBoard.successfulShots)
                   if(computerBoard.successfulShots.length === 21) {
                         console.log('YOU WIN!!!!!!!!!!')

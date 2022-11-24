@@ -161,7 +161,7 @@ class Gameboard {
       });
 
       // Updates the placeShip obj, currently seems redundant
-      //this.placedShipsObject[this.shipType].push(this.position)
+      this.placedShipsObject[this.shipType].push(this.position)
     };
 
     this.receiveAttack = (placement) => {
@@ -178,7 +178,7 @@ class Gameboard {
               console.log(key, e, j, k);
               e.splice(k, 1, `X`);
               attempt = "Hit!";
-              //this.successfulShots.push(j)
+              this.successfulShots.push(j)
               done = true;
             }
           });
@@ -195,7 +195,7 @@ class Gameboard {
           if (j == placement) {
 
             if (attempt === "Hit!") {
-              this.successfulShots.push(j)
+              //this.successfulShots.push(j)
               this.gameBoardArray[i].splice(k, 1, `X`);
             } else if (attempt === "Miss") {
               console.log('imhere');
