@@ -1,6 +1,6 @@
 import elementFactory from "../helpers/elementFactory"
 
-const gameboardPopulator = (gameboard, element) => {
+const computerboardPopulator = (gameboard, element) => {
 
     //const gameboardContainer = document.querySelector('.gameboard');
 
@@ -17,7 +17,7 @@ const gameboardPopulator = (gameboard, element) => {
             // let square = document.createElement('div');
             // square.setAttribute('data', Number(e));
 
-            let square = elementFactory('div', {id : e})
+            let square = elementFactory('div', {id : e, ondrop :"drop(event)", ondragover :"allowDrop(event)"})
             square.style.height = "30px";
             square.style.width = "30px";
             if(typeof e === 'string') {
@@ -26,7 +26,7 @@ const gameboardPopulator = (gameboard, element) => {
                 } else if(e === 'O') {
                     square.style.backgroundColor = 'black'
                 } else {
-                    square.style.backgroundColor = 'green';
+                    square.style.backgroundColor = 'blue';
                 }
                
             } else {
@@ -38,13 +38,10 @@ const gameboardPopulator = (gameboard, element) => {
         })
     })
 
+   
+
     //Hit placement 
-
-
-
-
 
 }
 
-
-export default gameboardPopulator
+export default computerboardPopulator

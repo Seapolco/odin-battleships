@@ -26,6 +26,7 @@ class Gameboard {
 
     this.placedShipPositions = [];
     this.missedShots = [];
+    this.successfulShots = [];
 
 
 
@@ -74,6 +75,10 @@ class Gameboard {
         console.log(this.invalid);
         return this.invalid;
 
+      }
+      if(startingPosition < 1) {
+        console.log('LESS THAT ZERO')
+        return this.invalid
       }
 
       this.ok = true;
@@ -173,6 +178,7 @@ class Gameboard {
               console.log(key, e, j, k);
               e.splice(k, 1, `X`);
               attempt = "Hit!";
+              //this.successfulShots.push(j)
               done = true;
             }
           });
@@ -189,7 +195,7 @@ class Gameboard {
           if (j == placement) {
 
             if (attempt === "Hit!") {
-
+              this.successfulShots.push(j)
               this.gameBoardArray[i].splice(k, 1, `X`);
             } else if (attempt === "Miss") {
               console.log('imhere');

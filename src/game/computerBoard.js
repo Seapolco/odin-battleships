@@ -15,6 +15,7 @@ class computerGameboard {
 
     this.placedShipPositions = [];
     this.missedShots = [];
+    this.successfulShots = [];
 
 
 
@@ -57,12 +58,20 @@ class computerGameboard {
 
       this.position = [];
 
+  
+
       console.log(this.placedShipPositions);
 
       if (this.placedShipPositions.includes(startingPosition)) {
         console.log(this.invalid);
+        this.ok = false;
         return this.invalid;
 
+      }
+
+      if(startingPosition < 1) {
+        console.log('LESS THAT ZERO')
+        return this.invalid
       }
 
       this.ok = true;
@@ -111,6 +120,7 @@ class computerGameboard {
 
           if (this.placedShipPositions.includes(startingPosition + i)) {
             console.log(`${this.invalid} ${startingPosition}`);
+            this.ok = false;
             return `${this.invalid} ${startingPosition}`;
           }
           this.position.push(startingPosition + i);
@@ -145,13 +155,14 @@ class computerGameboard {
       });
 
       // Updates the placeShip obj, currently seems redundant
-      //this.placedShipsObject[this.shipType].push(this.position)
+      this.placedShipsObject[this.shipType].push(this.position)
     };
+
 
     this.receiveAttack = (placement) => {
 
       let attempt = "Miss";
-      console.log(attempt);
+      //console.log(attempt);
       let done = false;
 
       for (let key in this.placedShipsObject) {
@@ -161,6 +172,7 @@ class computerGameboard {
             if (j === placement) {
               console.log(key, e, j, k);
               e.splice(k, 1, `X`);
+              this.successfulShots.push(j)
               attempt = "Hit!";
               done = true;
             }
@@ -168,7 +180,7 @@ class computerGameboard {
         });
       }
 
-      console.log('Before GBArry forEAch', attempt);
+     // console.log('Before GBArry forEAch', attempt);
 
 
       this.gameBoardArray.forEach((e, i) => {
@@ -178,7 +190,7 @@ class computerGameboard {
           if (j == placement) {
 
             if (attempt === "Hit!") {
-
+              // this.successfulShots.push(j)
               this.gameBoardArray[i].splice(k, 1, `X`);
             } else if (attempt === "Miss") {
               console.log('imhere');

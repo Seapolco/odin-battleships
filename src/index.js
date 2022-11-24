@@ -9,6 +9,8 @@ import Gameboard from './game/gameboard';
 import computerGameboard from "./game/computerBoard";
 import gameboardPopulator from "./game/gameboardPopulator";
 
+import computerboardPopulator from "./game/computerboardPopulator";
+
 import battleshipsPopulator from "./game/battleshipsPopulator";
 
 import DOMInteraction from './game/DOMinteraction';
@@ -26,13 +28,39 @@ placementPage();
 let placementBoard = dom.placementBoard();
 
 
-let unplacedShips = [5,4,4,3,3,2];
+// let unplacedShips = [5,4,4,3,3,2];
 
 let alignmentBtn = document.querySelector('.alignment');
 
 console.log(alignmentBtn)
 
 let alignment = 'horizontal';
+
+let currentPage = 'placement page'
+
+let notPlacedShips = [5,4,4,3,3,2];
+let alignments = ['vertical', 'horizontal', 'vertical', 'horizontal', 'vertical', 'horizontal'];
+
+const placeAllCompShips =()=> {
+
+        
+        
+        let random = () => Math.floor(Math.random() * 100)  +1
+        
+
+        let valid = computerBoard.placeShip(notPlacedShips[0], alignments[0], random());
+
+        console.log('VALIDDDDDDDDDD', valid)
+        if(valid === undefined) {
+                console.log('cbarray',computerBoard.gameBoardArray)
+                notPlacedShips.shift();
+                alignments.shift();
+                
+        } 
+
+
+
+}
 
 
 alignmentBtn.addEventListener('click', () => {
@@ -46,26 +74,50 @@ alignmentBtn.addEventListener('click', () => {
         
 })
 
+let unplacedShips = [5,4,4,3,3,2];
+
 
 placementBoard.addEventListener('click', (e) => {
+        
         console.log(startingGameboardArray)
         if(unplacedShips.length === 0 ) {
                 alert('All ships placed!')
                 battlePage();
+                currentPage = 'battleships page';
+                console.log(currentPage)
                 let battleShipsContainer = document.querySelector('.battleshipsContainer');
                 let playerContainer = document.querySelector('.playerContainer');
                 let computerContainer = document.querySelector('.computerContainer');
-                console.log(battleShipsContainer)
+                console.log(battleShipsContainer);
+                while(notPlacedShips.length > 0) {
+                        placeAllCompShips();
+                }
+
+                computerContainer.addEventListener('click', (e) => {
+                  console.log('BATTLEBABY', e.target.id)
+                  computerBoard.receiveAttack(Number(e.target.id))
+                  computerboardPopulator(computerBoard, computerContainer)
+                  console.log('successfulShotsonComp',computerBoard.successfulShots)
+                  if(computerBoard.successfulShots.length === 21) {
+                        console.log('YOU WIN!!!!!!!!!!')
+                  }
+                  console.log(computerBoard.gameBoardArray)
+                  console.log('cbobj',computerBoard.placedShipsObject)
+                  console.log('pbobj',playerOneBoard.placedShipsObject)
+                })
                 
 
-                battleshipsPopulator(playerOneBoard, playerContainer, computerBoard, computerContainer)
+                gameboardPopulator(playerOneBoard, playerContainer) 
+                computerboardPopulator(computerBoard, computerContainer) 
                 //gameboardPopulator(playerOneBoard)
 
         }
+
+        
         
         console.log(e.target.id)
         let valid = playerOneBoard.placeShip(unplacedShips[0], alignment, Number(e.target.id));
-        if(valid !== 'Invalid placement') {
+        if(valid === undefined) {
                 playerOneBoard.placeShip(unplacedShips[0], alignment, Number(e.target.id))
                 gameboardPopulator(playerOneBoard, placementBoard)
                 unplacedShips.shift();
@@ -73,6 +125,8 @@ placementBoard.addEventListener('click', (e) => {
         }
 
 })
+
+
 
 
 
