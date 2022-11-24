@@ -6,6 +6,7 @@ import placementPage from './pages/placementPage';
 import elementFactory from "./helpers/elementFactory";
 
 import Gameboard from './game/gameboard';
+import computerGameboard from "./game/computerBoard";
 import gameboardPopulator from "./game/gameboardPopulator";
 
 import battleshipsPopulator from "./game/battleshipsPopulator";
@@ -14,9 +15,11 @@ import DOMInteraction from './game/DOMinteraction';
 
 import battlePage from './pages/battlePage';
 
+import startingGameboardArray from './game/startingGameboardArray';
+
 
 let playerOneBoard = new Gameboard();
-let computerBoard = new Gameboard();
+let computerBoard = new computerGameboard();
 
 placementPage();
 
@@ -45,6 +48,7 @@ alignmentBtn.addEventListener('click', () => {
 
 
 placementBoard.addEventListener('click', (e) => {
+        console.log(startingGameboardArray)
         if(unplacedShips.length === 0 ) {
                 alert('All ships placed!')
                 battlePage();
@@ -52,6 +56,8 @@ placementBoard.addEventListener('click', (e) => {
                 let playerContainer = document.querySelector('.playerContainer');
                 let computerContainer = document.querySelector('.computerContainer');
                 console.log(battleShipsContainer)
+                
+
                 battleshipsPopulator(playerOneBoard, playerContainer, computerBoard, computerContainer)
                 //gameboardPopulator(playerOneBoard)
 

@@ -1,28 +1,17 @@
 
-import startingGameboardArray from "./startingGameboardArray"
+import startingcompBoardArray from "./startingCompArray"
 
 
 import shipId from './shipIdentifier';
 
 
 
-// No.	Class of ship	Size
-// 1	Carrier	         5
-// 2	Battleship     	 4
-// 3	Cruiser	         3
-// 4	Submarine	     3
-// 5	Destroyer	     2
 
-//let sg = startingGameBoardArray
-
-
-
-
-class Gameboard {
+class computerGameboard {
   constructor() {
 
 
-    this.gameBoardArray = [...startingGameboardArray];
+    this.gameBoardArray = [...startingcompBoardArray];
 
     this.placedShipPositions = [];
     this.missedShots = [];
@@ -215,4 +204,4 @@ class Gameboard {
   }
 }
 
-export default Gameboard
+export default computerGameboard
