@@ -19,6 +19,15 @@ body  {
     width: 30px;
     background-color: green;
     border: solid 2px white;
+}
 
+.playerContainer, .computerContainer {
+    display: grid;
+    grid-template-rows: repeat(10, 30px);
+    grid-template-columns: repeat(10, 30px);
+}
 
+.battleshipsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
