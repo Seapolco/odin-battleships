@@ -27,6 +27,7 @@ class Gameboard {
     this.placedShipPositions = [];
     this.missedShots = [];
     this.successfulShots = [];
+    this.lastAttack = "";
 
 
 
@@ -178,6 +179,7 @@ class Gameboard {
               console.log(key, e, j, k);
               e.splice(k, 1, `X`);
               attempt = "Hit!";
+              this.lastAttack = 'Hit'
               this.successfulShots.push(j)
               done = true;
             }
@@ -210,7 +212,7 @@ class Gameboard {
       console.log(attempt, placement, done);
 
       if (attempt === "Miss") {
-
+        this.lastAttack = "Miss"
         this.missedShots.push(placement);
 
       }
