@@ -161,6 +161,19 @@ class computerGameboard {
 
     this.receiveAttack = (placement) => {
 
+      console.log('PLACEMENT', placement)
+
+      console.log(this.successfulShots, this.missedShots)
+
+      if(placement === NaN) {
+        return NaN
+      }
+
+      if(this.successfulShots.includes(placement) || this.missedShots.includes(placement)) {
+        console.log('INVALID', placement)
+        return null
+      }
+
       let attempt = "Miss";
       //console.log(attempt);
       let done = false;
@@ -206,6 +219,7 @@ class computerGameboard {
       if (attempt === "Miss") {
 
         this.missedShots.push(placement);
+        console.log(this.missedShots)
 
       }
       return attempt;

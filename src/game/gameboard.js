@@ -199,6 +199,7 @@ class Gameboard {
               this.gameBoardArray[i].splice(k, 1, `X`);
             } else if (attempt === "Miss") {
               console.log('imhere');
+              // this.missedShots.push(placement)
               this.gameBoardArray[i].splice(k, 1, `O`);
             }
 

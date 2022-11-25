@@ -94,28 +94,74 @@ placementBoard.addEventListener('click', (e) => {
                 }
 
                 computerContainer.addEventListener('click', (e) => {
-                  let random = () => Math.floor(Math.random() * 100)  +1
-                  console.log('BATTLEBABY', e.target.id)
-                  computerBoard.receiveAttack(Number(e.target.id))
-                  console.log('random', random())
-                  // optimise random first - ensure random shot
-                  //hasn't already been taken.
 
-                  //then need to ensure that if hit is made, the next shot
-                  //is either one square x/y across,
-                  //need to keep track of possible ships already destroyed.
-                  // shiplengths, adjacents hits.
-                  playerOneBoard.receiveAttack(random())
-                  console.log('playerboardArray',playerOneBoard.gameBoardArray)
-                  computerboardPopulator(computerBoard, computerContainer)
-                  gameboardPopulator(playerOneBoard, playerContainer)
-                  console.log('successfulShotsonComp',computerBoard.successfulShots)
-                  if(computerBoard.successfulShots.length === 21) {
-                        console.log('YOU WIN!!!!!!!!!!')
-                  }
-                  console.log(computerBoard.gameBoardArray)
-                  console.log('cbobj',computerBoard.placedShipsObject)
-                  console.log('pbobj',playerOneBoard.placedShipsObject)
+                console.log(e.target.id)
+
+                if(e.target.id !== 'O' && e.target.id !== 'X') {
+
+
+                        let random = () => Math.floor(Math.random() * 100)  +1
+                        console.log('BATTLEBABY', e.target.id)
+      
+      
+                        
+      
+                        
+      
+                        
+                        console.log(computerBoard.receiveAttack(Number(e.target.id)))
+                             
+                        
+      
+      
+                      //   if(computerBoard.receiveAttack(Number(e.target.id)) !== null) {
+                      //         computersturn = true
+                      //   }
+      
+                        
+      
+                        console.log('random', random())
+                        // optimise random first - ensure random shot
+                        //hasn't already been taken.
+      
+                        //then need to ensure that if hit is made, the next shot
+                        //is either one square x/y across,
+                        //need to keep track of possible ships already destroyed.
+                        // shiplengths, adjacents hits.
+                        let number = random();
+      
+                        while(playerOneBoard.missedShots.includes(number)) {
+                              console.log('WHILELOOP MATCH', number)
+                              number = random()
+                        }
+                       console.log('randomnumber', number)
+      
+                       console.log(Number(e.target.id))
+      
+      
+                              playerOneBoard.receiveAttack(number)
+                              
+                        
+                        
+                        console.log('plmissedshots', playerOneBoard.missedShots.sort((a,b) => a-b))
+                        console.log('playerboardArray',playerOneBoard.gameBoardArray)
+                        computerboardPopulator(computerBoard, computerContainer)
+                        gameboardPopulator(playerOneBoard, playerContainer)
+                        console.log('successfulShotsonComp',computerBoard.successfulShots)
+                        if(computerBoard.successfulShots.length === 21) {
+                              console.log('YOU WIN!!!!!!!!!!')
+                        }
+                        console.log(computerBoard.gameBoardArray)
+                        console.log('cbobj',computerBoard.placedShipsObject)
+                        console.log('pbobj',playerOneBoard.placedShipsObject)
+
+
+
+
+                        
+                }
+                  
+                  
                 })
                 
 
@@ -123,11 +169,11 @@ placementBoard.addEventListener('click', (e) => {
                 computerboardPopulator(computerBoard, computerContainer) 
                 //gameboardPopulator(playerOneBoard)
 
+                console.log(e.target.id)
+        
+        
         }
 
-        
-        
-        console.log(e.target.id)
         let valid = playerOneBoard.placeShip(unplacedShips[0], alignment, Number(e.target.id));
         if(valid === undefined) {
                 playerOneBoard.placeShip(unplacedShips[0], alignment, Number(e.target.id))
@@ -135,6 +181,8 @@ placementBoard.addEventListener('click', (e) => {
                 unplacedShips.shift();
                 console.log(unplacedShips.length)
         }
+        
+ 
 
 })
 
