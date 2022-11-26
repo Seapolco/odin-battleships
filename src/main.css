@@ -3,12 +3,21 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body  {
+    display: grid;
     background-color: peru;
+    place-items: center;
+    height: 100%;
+    grid-template-rows: 100px 1fr;
 }
 
 .placementBoard {
     display: grid;
+    justify-content: center;
     grid-template-rows: repeat(10, 30px);
     grid-template-columns: repeat(10, 30px);
     max-width: 0px;
@@ -23,11 +32,14 @@ body  {
 
 .playerContainer, .computerContainer {
     display: grid;
+    place-items: center;
     grid-template-rows: repeat(10, 30px);
     grid-template-columns: repeat(10, 30px);
 }
 
 .battleshipsContainer {
     display: grid;
+    place-items: center;
+    gap: 100px;
     grid-template-columns: 1fr 1fr;
 }

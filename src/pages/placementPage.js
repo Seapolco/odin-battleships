@@ -3,7 +3,15 @@ import elementFactory from "../helpers/elementFactory";
 
 const placementPage = function placementPageGenerator() {
 
+  let placementPageWrapper = elementFactory('div', {class: 'placementPageWrapper'});
+
   let placementBoard =   elementFactory('div', {class: 'placementBoard'})
+
+  let shipContainer = elementFactory('div', {class: 'shipContainer'});
+
+  let alignmentBtn = elementFactory('button', {class: 'alignmentBtn'});
+
+  
 
   document.body.appendChild(placementBoard)
 
