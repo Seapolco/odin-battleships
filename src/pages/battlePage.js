@@ -13,6 +13,7 @@ const battlePage = function battleShipsPage() {
 
     const playerContainer = elementFactory('div', {class: 'playerContainer'});
     const computerContainer = elementFactory('div', {class: 'computerContainer' });
+        
 
 
 

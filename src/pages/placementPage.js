@@ -10,10 +10,20 @@ const placementPage = function placementPageGenerator() {
   let shipContainer = elementFactory('div', {class: 'shipContainer'});
 
   let alignmentBtn = elementFactory('button', {class: 'alignmentBtn'});
+  alignmentBtn.innerText = 'Switch to vertical placement';
+
+  let placePlayButton = elementFactory('button', {class: 'placePlayBtn'})
+  placePlayButton.innerText = 'Enter Battle!'
+  placePlayButton.style.visibility = 'hidden';
 
   
+  document.body.appendChild(placementPageWrapper);
 
-  document.body.appendChild(placementBoard)
+  placementPageWrapper.appendChild(placementBoard)
+  placementPageWrapper.appendChild(shipContainer)
+  shipContainer.appendChild(alignmentBtn)
+  shipContainer.appendChild(placePlayButton)
+  
 
 
   //   let gameboardArray = [];

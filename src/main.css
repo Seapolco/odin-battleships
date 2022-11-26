@@ -1,18 +1,25 @@
 * {
-    color: pink;
+    /* color: pink; */
     box-sizing: border-box;
 }
 
 html {
     height: 100%;
+   
 }
 
 body  {
     display: grid;
-    background-color: peru;
+    background-image: url('./assets/images/ocean.avif');
+   
     place-items: center;
     height: 100%;
     grid-template-rows: 100px 1fr;
+}
+
+.placementPageWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .placementBoard {
@@ -28,6 +35,11 @@ body  {
     width: 30px;
     background-color: green;
     border: solid 2px white;
+}
+
+.placePlayBtn {
+    display:grid;
+    align-self: end;    
 }
 
 .playerContainer, .computerContainer {

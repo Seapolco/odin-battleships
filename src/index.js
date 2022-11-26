@@ -25,12 +25,16 @@ let computerBoard = new computerGameboard();
 
 placementPage();
 
+
 let placementBoard = dom.placementBoard();
 
 
 // let unplacedShips = [5,4,4,3,3,2];
 
-let alignmentBtn = document.querySelector('.alignment');
+let alignmentBtn = document.querySelector('.alignmentBtn');
+let placePlayBtn = document.querySelector('.placePlayBtn');
+console.log(placePlayBtn)
+
 
 console.log(alignmentBtn)
 
@@ -116,12 +120,12 @@ alignmentBtn.addEventListener('click', () => {
 let unplacedShips = [5,4,4,3,3,2];
 
 
-placementBoard.addEventListener('click', (e) => {
-        
-        console.log(startingGameboardArray)
-        if(unplacedShips.length === 0 ) {
-                alert('All ships placed!')
-                battlePage();
+placePlayBtn.addEventListener('click', () => {
+        console.log(unplacedShips.length === 0)
+                        //alert('All ships placed!')
+               
+                
+                 battlePage();
                 currentPage = 'battleships page';
                 console.log(currentPage)
                 let battleShipsContainer = document.querySelector('.battleshipsContainer');
@@ -209,6 +213,19 @@ placementBoard.addEventListener('click', (e) => {
                 //gameboardPopulator(playerOneBoard)
 
                 console.log(e.target.id)
+})
+
+
+
+placementBoard.addEventListener('click', (e) => {
+
+        if(unplacedShips.length === 1) {
+                placePlayBtn.style.visibility = 'visible';
+        }
+        
+        console.log(startingGameboardArray)
+        if(unplacedShips.length === 0 ) {
+
         
         
         }

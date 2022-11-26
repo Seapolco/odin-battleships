@@ -24,15 +24,15 @@ const computerboardPopulator = (gameboard, element) => {
                 if(e === 'X') {
                     square.style.backgroundColor = 'red'
                 } else if(e === 'O') {
-                    square.style.backgroundColor = 'black'
+                    square.style.backgroundColor = 'white'
                 } else {
-                    square.style.backgroundColor = 'blue';
+                    square.style.backgroundColor = 'transparent';
                 }
                
             } else {
-                square.style.backgroundColor = 'blue';
+                square.style.backgroundColor = 'transparent';
             }
-            square.style.border = 'solid white 2px'
+            square.style.border = 'solid white 1px'
     
             element.appendChild(square)
         })
