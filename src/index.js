@@ -19,9 +19,13 @@ import battlePage from './pages/battlePage';
 
 import startingGameboardArray from './game/startingGameboardArray';
 
+import gameFlow from './game/tempGameFlow';
 
-let playerOneBoard = new Gameboard();
-let computerBoard = new computerGameboard();
+import playerOneBoard from '../src/game/playerOneBoard';
+
+
+//let playerOneBoard = playerOneBoard
+// let computerBoard = new computerGameboard();
 
 placementPage();
 
@@ -42,68 +46,68 @@ let alignment = 'horizontal';
 
 let currentPage = 'placement page'
 
-let notPlacedShips = [5,4,4,3,3,2];
-let alignments = ['vertical', 'horizontal', 'vertical', 'horizontal', 'vertical', 'horizontal'];
+// let notPlacedShips = [5,4,4,3,3,2];
+// let alignments = ['vertical', 'horizontal', 'vertical', 'horizontal', 'vertical', 'horizontal'];
 
-function converter(num, direction) {
-        if(direction === 'left') {
-          return num + 1;
-        }
-        if(direction === 'right') {
-          return num - 1;
-        }
-        if(direction === 'up') {
-          return num -10;
-        }
-        if(direction === 'down') {
-          return num + 10;
-        }
-}
+// function converter(num, direction) {
+//         if(direction === 'left') {
+//           return num + 1;
+//         }
+//         if(direction === 'right') {
+//           return num - 1;
+//         }
+//         if(direction === 'up') {
+//           return num -10;
+//         }
+//         if(direction === 'down') {
+//           return num + 10;
+//         }
+// }
       
       
-let placements = []
+// let placements = []
 
-function shipCheck(placement) {
+// function shipCheck(placement) {
 
-while(placements.length > 0) {
-        placements.pop();
-}      
+// while(placements.length > 0) {
+//         placements.pop();
+// }      
 
-let arr = ['left', 'right', 'up', 'down']
+// let arr = ['left', 'right', 'up', 'down']
 
-for(let i = 0; i< 4; i++) {
-        console.log(i)
-        let nextAttack = converter(placement,arr[0]);
-        if( nextAttack <= 100 && nextAttack >= 1 ) {
-                placements.push(nextAttack)
-                console.log(placements)
-                arr.shift();
-        }
+// for(let i = 0; i< 4; i++) {
+//         console.log(i)
+//         let nextAttack = converter(placement,arr[0]);
+//         if( nextAttack <= 100 && nextAttack >= 1 ) {
+//                 placements.push(nextAttack)
+//                 console.log(placements)
+//                 arr.shift();
+//         }
 
-}
+// }
 
-}
+// }
 
-const placeAllCompShips =()=> {
+// const placeAllCompShips =()=> {
 
         
         
-        let random = () => Math.floor(Math.random() * 100)  +1
+//         let random = () => Math.floor(Math.random() * 100)  +1
         
 
-        let valid = computerBoard.placeShip(notPlacedShips[0], alignments[0], random());
+//         let valid = computerBoard.placeShip(notPlacedShips[0], alignments[0], random());
 
-        console.log('VALIDDDDDDDDDD', valid)
-        if(valid === undefined) {
-                console.log('cbarray',computerBoard.gameBoardArray)
-                notPlacedShips.shift();
-                alignments.shift();
+//         console.log('VALIDDDDDDDDDD', valid)
+//         if(valid === undefined) {
+//                 console.log('cbarray',computerBoard.gameBoardArray)
+//                 notPlacedShips.shift();
+//                 alignments.shift();
                 
-        } 
+//         } 
 
 
 
-}
+// }
 
 
 alignmentBtn.addEventListener('click', () => {
@@ -122,97 +126,9 @@ let unplacedShips = [5,4,4,3,3,2];
 
 placePlayBtn.addEventListener('click', () => {
         console.log(unplacedShips.length === 0)
-                        //alert('All ships placed!')
-               
-                
-                 battlePage();
-                currentPage = 'battleships page';
-                console.log(currentPage)
-                let battleShipsContainer = document.querySelector('.battleshipsContainer');
-                let playerContainer = document.querySelector('.playerContainer');
-                let computerContainer = document.querySelector('.computerContainer');
-                console.log(battleShipsContainer);
-                while(notPlacedShips.length > 0) {
-                        placeAllCompShips();
-                }
-
-                computerContainer.addEventListener('click', (e) => {
-
-                console.log(e.target.id)
-
-                if(e.target.id !== 'O' && e.target.id !== 'X') {
+        gameFlow();
 
 
-                        let random = () => Math.floor(Math.random() * 100)  +1
-                        console.log('BATTLEBABY', e.target.id)
-      
-                        console.log(computerBoard.receiveAttack(Number(e.target.id)))
-
-                        console.log('random', random())
-                        // optimise random first - ensure random shot
-                        //hasn't already been taken.
-      
-                        //then need to ensure that if hit is made, the next shot
-                        //is either one square x/y across,
-                        //need to keep track of possible ships already destroyed.
-                        // shiplengths, adjacents hits.
-                        let number = random();
-      
-                        while(playerOneBoard.missedShots.includes(number)) {
-                              console.log('WHILELOOP MATCH', number)
-                              number = random()
-                        }
-                       console.log('randomnumber', number)
-      
-                       console.log(Number(e.target.id))
-      
-                              console.log('PREVIOUS ATTACK', playerOneBoard.lastAttack)
-                              if(playerOneBoard.lastAttack === "Hit" && placements.length < 1) {
-                                console.log('PLACEMENTS',placements)
-                                console.log(playerOneBoard.successfulShots,'P1SUCCSHOTS **********************')
-                                console.log(playerOneBoard.successfulShots, 'PLAYER SUCCESS!!!')
-                                console.log(shipCheck(playerOneBoard.successfulShots[0]))
-                                shipCheck(playerOneBoard.successfulShots[playerOneBoard.successfulShots.length -1])
-                              }
-                              if(placements.length > 0) {
-                                console.log('PLACEMENTS BEFORE', placements)
-                                playerOneBoard.receiveAttack(placements[0]);
-                                console.log('PLACEMENTS AFTER', placements)
-                                placements.shift();
-                              } else {
-                                playerOneBoard.receiveAttack(number)
-                              }
-                             
-                              
-                        
-                        
-                        console.log('plmissedshots', playerOneBoard.missedShots.sort((a,b) => a-b))
-                        console.log('playerboardArray',playerOneBoard.gameBoardArray)
-                        computerboardPopulator(computerBoard, computerContainer)
-                        gameboardPopulator(playerOneBoard, playerContainer)
-                        console.log('successfulShotsonComp',computerBoard.successfulShots)
-                        if(computerBoard.successfulShots.length === 21) {
-                              console.log('YOU WIN!!!!!!!!!!')
-                        }
-                        console.log(computerBoard.gameBoardArray)
-                        console.log('cbobj',computerBoard.placedShipsObject)
-                        console.log('pbobj',playerOneBoard.placedShipsObject)
-
-
-
-
-                        
-                }
-                  
-                  
-                })
-                
-
-                gameboardPopulator(playerOneBoard, playerContainer) 
-                computerboardPopulator(computerBoard, computerContainer) 
-                //gameboardPopulator(playerOneBoard)
-
-                console.log(e.target.id)
 })
 
 
@@ -253,4 +169,6 @@ gameboardPopulator(playerOneBoard, placementBoard)
 
 
 console.log('POW!')
+
+export {playerOneBoard}
 
