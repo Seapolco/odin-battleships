@@ -55,10 +55,22 @@ let alignments = ['vertical', 'horizontal', 'vertical', 'horizontal', 'vertical'
                 console.log(i)
                 let nextAttack = converter(placement,arr[0]);
                 if( nextAttack <= 100 && nextAttack >= 1 ) {
+                        if(!playerOneBoard.successfulShots.includes(nextAttack) && !playerOneBoard.missedShots.includes(nextAttack)) {
+                                                       
                         placements.push(nextAttack)
                         console.log(placements)
                         arr.shift();
-                }
+                        } else {
+                                arr.shift();
+                        }
+                        console.log('INSIDE SHIP CHECK', playerOneBoard.successfulShots.includes(nextAttack), 'SS--------------')
+                        console.log('INSIDE SHIP CHECK', playerOneBoard.missedShots.includes(nextAttack), 'MS--------------')
+ 
+                } 
+                       
+                
+                console.log('INSIDE SHIP CHECK', placements, '--------------')
+                
         
         }
         
@@ -139,10 +151,15 @@ let alignments = ['vertical', 'horizontal', 'vertical', 'horizontal', 'vertical'
                             shipCheck(playerOneBoard.successfulShots[playerOneBoard.successfulShots.length -1])
                             }
                             if(placements.length > 0) {
+                            console.log('BUGGGGING','hits:', playerOneBoard.successfulShots )
+                            console.log('BUGGGGING','misses:', playerOneBoard.missedShots )
                             console.log('PLACEMENTS BEFORE', placements)
-                            playerOneBoard.receiveAttack(placements[0]);
-                            console.log('PLACEMENTS AFTER', placements)
-                            placements.shift();
+                            
+                                playerOneBoard.receiveAttack(placements[0]);
+                                console.log('PLACEMENTS AFTER', placements)
+                                placements.shift();
+                            
+
                             } else {
                             playerOneBoard.receiveAttack(number)
                             }
