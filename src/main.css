@@ -30,17 +30,17 @@ h1 {
 
 .placementPageWrapper {
     display: grid;
-    grid-template-rows: 1fr 6fr;
+    grid-template-columns: 2fr 1fr;
 }
 
 .alignmentBtn {
     display:grid;
-    grid-row:1/2;
+ 
 }
 
 .placementBoard {
     display: grid;
-    grid-row: 2/2;
+    
     justify-content: center;
     grid-template-rows: repeat(10, 30px);
     grid-template-columns: repeat(10, 30px);
@@ -53,6 +53,18 @@ h1 {
     background-color: green;
     border: solid 2px white;
 }
+
+.ships {
+    display: grid;
+    /* grid-template-columns: repeat(6,1fr); */
+    gap: 5px; 
+}
+
+/* .ships > div {
+    display: block;
+} */
+
+
 
 .placePlayBtn {
     display:grid;
@@ -72,3 +84,4 @@ h1 {
     gap: 100px;
     grid-template-columns: 1fr 1fr;
 }
+

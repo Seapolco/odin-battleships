@@ -109,14 +109,27 @@ let currentPage = 'placement page'
 
 // }
 
+const ships = document.querySelector('.ships');
+const allShip = document.querySelectorAll('.ship');
+
 
 alignmentBtn.addEventListener('click', () => {
         if(alignmentBtn.innerText === 'Switch to vertical placement') {
                 alignmentBtn.innerText = 'Switch to horizontal placement';
-                alignment = 'vertical'
+                alignment = 'vertical';
+                allShip.forEach((e) => e.style.display = 'block' )
+                
+                ships.style.gridTemplateRows = '';
+                ships.style.gridTemplateColumns = "repeat(6,1fr)"
+
         } else if(alignmentBtn.innerText === 'Switch to horizontal placement') {
                 alignmentBtn.innerText = 'Switch to vertical placement';
                 alignment = 'horizontal'
+
+                ships.style.gridTemplateColumns = '';
+                 ships.style.gridTemplateRows = 'repeat(6,1fr)';
+                 allShip.forEach((e) => e.style.display = 'flex')
+
         }
         
 })
